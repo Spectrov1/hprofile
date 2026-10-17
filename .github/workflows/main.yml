@@ -39,5 +39,15 @@ jobs:
            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
            -Dsonar.java.binaries=target/test-classes/com/visualpa
 
+      # Check the Quality Gate statuS
+      - name: SonaQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-qulaity-gate-action@master
+          # Force to sfail setp after a specific time.
+        timeout-minutes: 5
+        env: 
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} #OPTIONAL
+
         
       
